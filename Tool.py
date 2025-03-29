@@ -304,7 +304,7 @@ def hunter_io_search(tool: OSINTTool):
 
     # Check if Hunter.io API key exists
     if "HUNTER_API_KEY" not in tool.api_keys:
-        print("Hunter.io API key not found. Skipping email intelligence.")
+        print("Hunter.io API key not found.")
         wait_for_input()
         return
 
@@ -336,7 +336,7 @@ def virustotal_check(tool: OSINTTool):
     clear_screen()
     # Check if VirusTotal API key exists
     if "VIRUSTOTAL_API_KEY" not in tool.api_keys:
-        print("VirusTotal API key not found. Skipping check.")
+        print("VirusTotal API key not found.")
         wait_for_input()
         return
 
@@ -395,7 +395,7 @@ def shodan_search(tool: OSINTTool):
     clear_screen()
     # Check if Shodan API key exists
     if "SHODAN_API_KEY" not in tool.api_keys:
-        print("Shodan API key not found. Skipping search.")
+        print("Shodan API key not found.")
         wait_for_input()
         return
 
@@ -425,7 +425,7 @@ def verify_phone_number(tool: OSINTTool):
     clear_screen()
     # Check if NumVerify API key exists
     if "NUMVERIFY_API_KEY" not in tool.api_keys:
-        print("NumVerify API key not found. Skipping phone number lookup.")
+        print("NumVerify API key not found.")
         wait_for_input()
         return
 
