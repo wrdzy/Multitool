@@ -64,8 +64,10 @@ def wait_for_input():
     input("\nPress Enter to continue...")
     clear_screen()
 
+import os
+
 class OSINTTool:
-    def __init__(self, api_key_file: str = 'APIs.txt'):
+    def __init__(self, api_key_file: str = 'APIS.txt'):
         """
         Initialize the OSINT tool with API keys.
 
@@ -73,7 +75,7 @@ class OSINTTool:
         """
         self.api_keys = self._read_api_keys(api_key_file)
 
-    def _read_api_keys(self, file_path: str) -> Dict[str, str]:
+    def _read_api_keys(self, file_path: str) -> dict:
         """
         Read API keys from a configuration file.
 
@@ -83,8 +85,8 @@ class OSINTTool:
         api_keys = {}
 
         # Ensure the file path is absolute
-        script_dir = os.path.dirname(os.path.abspath(__file__))  # Get script directory
-        full_path = os.path.join(script_dir, file_path)  # Construct absolute path
+        script_dir = os.path.dirname(os.path.abspath(__file__))  # Get the script directory
+        full_path = os.path.join(script_dir, file_path)  # Construct the absolute path
 
         try:
             with open(full_path, 'r') as file:
@@ -94,12 +96,13 @@ class OSINTTool:
                         key, value = line.split('=', 1)
                         api_keys[key.strip()] = value.strip()
         except FileNotFoundError:
-            print("Warning: API key file not found: " + full_path)
+            print(f"Warning: API key file not found: {full_path}")
             print("Some features may be limited without API keys.")
         except Exception as e:
-            print("Error reading API keys: " + str(e))
+            print(f"Error reading API keys: {str(e)}")
 
         return api_keys
+
 
     def validate_email(self, email: str) -> bool:
         clear_screen()
