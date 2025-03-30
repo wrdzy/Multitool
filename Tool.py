@@ -11,15 +11,14 @@ import ipaddress
 import time
 import psutil
 import shutil
-import math
 import random
 import msvcrt  # Windows-specific module for key detection
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import Dict, Optional, Any
 from mistralai import Mistral
-import ctypes
-import asyncio
+
+
 
 # ANSI color codes
 COLOR_BLUE = "\033[94m"
@@ -36,7 +35,7 @@ def clear_screen():
 def print_header():
     """Prints the tool's centered header with colors."""
     header = """
-      ▄████▄   ██▀███   ▒█████   █     █░
+      ▄████▄   ██▀███   ▒█████   █     █░ version 1.5.6
     ▒██▀ ▀█  ▓██ ▒ ██▒▒██▒  ██▒▓█░ █ ░█░
     ▒▓█    ▄ ▓██ ░▄█ ▒▒██░  ██▒▒█░ █ ░█
     ▒▓▓▄ ▄██▒▒██▀▀█▄  ▒██   ██░░█░ █ ░█
@@ -64,44 +63,46 @@ def wait_for_input():
     input("\nPress Enter to continue...")
     clear_screen()
 
-import os
-
 class OSINTTool:
     def __init__(self, api_key_file: str = 'APIS.txt'):
         """
         Initialize the OSINT tool with API keys.
-
-        :param api_key_file: Path to the API keys configuration file.
         """
         self.api_keys = self._read_api_keys(api_key_file)
 
-    def _read_api_keys(self, file_path: str) -> dict:
+    def _read_api_keys(self, file_name: str) -> dict:
         """
-        Read API keys from a configuration file.
-
-        :param file_path: Path to the API keys file.
-        :return: Dictionary of API keys.
+        Read API keys from a configuration file in the same directory as the executable.
         """
         api_keys = {}
 
-        # Ensure the file path is absolute
-        script_dir = os.path.dirname(os.path.abspath(__file__))  # Get the script directory
-        full_path = os.path.join(script_dir, file_path)  # Construct the absolute path
+        # Get the directory where the script or .exe is located
+        if getattr(sys, 'frozen', False):
+            # If running from the compiled .exe, use sys._MEIPASS
+            base_path = os.path.dirname(sys.executable)
+        else:
+            # If running from the script, use the current directory
+            base_path = os.path.dirname(os.path.abspath(__file__))
 
+        # Define the full path to the APIS.txt file
+        file_path = os.path.join(base_path, file_name)
+
+        # Read the file
         try:
-            with open(full_path, 'r') as file:
+            with open(file_path, 'r') as file:
                 for line in file:
                     line = line.strip()
                     if line and not line.startswith('#'):
                         key, value = line.split('=', 1)
                         api_keys[key.strip()] = value.strip()
         except FileNotFoundError:
-            print(f"Warning: API key file not found: {full_path}")
-            print("Some features may be limited without API keys.")
+            print(f"API key file not found at {file_path}. Please ensure it exists.")
         except Exception as e:
             print(f"Error reading API keys: {str(e)}")
 
         return api_keys
+
+
 
 
     def validate_email(self, email: str) -> bool:
