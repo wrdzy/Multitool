@@ -45,7 +45,7 @@ def print_header():
     ░          ░░   ░ ░ ░ ░ ▒    ░   ░
     ░ ░        ░░   ░ ░ ░ ░ ▒    ░   ░
     ░ ░
-     version 3.5.6
+     version 1.5.6
     """
     terminal_width = shutil.get_terminal_size().columns
     header_lines = header.split("\n")
