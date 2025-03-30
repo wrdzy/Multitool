@@ -35,7 +35,7 @@ def clear_screen():
 def print_header():
     """Prints the tool's centered header with colors."""
     header = """
-      ▄████▄   ██▀███   ▒█████   █     █░ version 1.5.6
+      ▄████▄   ██▀███   ▒█████   █     █░
     ▒██▀ ▀█  ▓██ ▒ ██▒▒██▒  ██▒▓█░ █ ░█░
     ▒▓█    ▄ ▓██ ░▄█ ▒▒██░  ██▒▒█░ █ ░█
     ▒▓▓▄ ▄██▒▒██▀▀█▄  ▒██   ██░░█░ █ ░█
@@ -45,6 +45,7 @@ def print_header():
     ░          ░░   ░ ░ ░ ░ ▒    ░   ░
     ░ ░        ░░   ░ ░ ░ ░ ▒    ░   ░
     ░ ░
+     version 1.5.6
     """
     terminal_width = shutil.get_terminal_size().columns
     header_lines = header.split("\n")
