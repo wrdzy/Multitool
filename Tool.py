@@ -16,8 +16,7 @@ import shutil
 import random
 import msvcrt  # Windows-specific module for key detection
 import numpy as np
-import matplotlib.pyplot as plt
-from typing import Dict, Optional, Any
+from typing import Dict
 from mistralai import Mistral
 
 
